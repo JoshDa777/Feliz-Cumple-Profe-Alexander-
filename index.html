@@ -152,18 +152,6 @@
         .prompt-user { color: #00b4d8; }
         .prompt-path { color: #fff; }
 
-        .sys-msg {
-            color: #aaa;
-            font-size: 0.9em;
-            margin: 5px 0;
-        }
-
-        .sys-success {
-            color: #00b4d8;
-            font-size: 0.9em;
-            margin: 5px 0 20px 0;
-        }
-
         /* Memes a los costados */
         .side-memes {
             position: fixed;
@@ -184,6 +172,15 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
             transition: all 0.3s ease;
             cursor: pointer;
+            /* Estilo por si la imagen no carga de inmediato */
+            background: rgba(255,255,255,0.1);
+            min-height: 150px;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.9em;
         }
 
         .side-memes.left img { transform: rotate(-8deg); }
@@ -235,13 +232,13 @@
     <div id="particles"></div>
 
     <div class="side-memes left">
-        <img src="https://i.imgflip.com/1q0b9p.jpg" alt="Meme Programador 1">
-        <img src="https://i.imgflip.com/1y99v3.jpg" alt="Meme Cumpleaños 1">
+        <img src="meme_profe_1.jpg" alt="Coloca tu meme aquí (meme_profe_1.jpg)">
+        <img src="meme_cumple_1.jpg" alt="Coloca tu meme aquí (meme_cumple_1.jpg)">
     </div>
 
     <div class="side-memes right">
-        <img src="https://i.imgflip.com/39t1cj.jpg" alt="Meme Programador 2">
-        <img src="https://i.imgflip.com/2v85b1.jpg" alt="Meme Cumpleaños 2">
+        <img src="meme_profe_2.jpg" alt="Coloca tu meme aquí (meme_profe_2.jpg)">
+        <img src="meme_cumple_2.jpg" alt="Coloca tu meme aquí (meme_cumple_2.jpg)">
     </div>
 
     <div class="card">
@@ -275,11 +272,9 @@
                 bash - estudiante_grado10@sistemas:~
             </div>
             <div class="terminal-body">
-                <p class="command"><span class="prompt-user">estudiante_grado10@sistemas</span>:<span class="prompt-path">~</span>$ ./iniciar_fiesta.sh</p>
-                <p class="sys-msg">[INFO] Descargando módulos de celebración...</p>
-                <p class="sys-success">[OK] Dependencias instaladas. Iniciando pista de baile al 100%.</p>
+                <p class="command"><span class="prompt-user">estudiante_grado10@sistemas</span>:<span class="prompt-path">~</span>$ curl ascii.live/parrot</p>
                 
-                <pre id="animacion-ascii" style="margin-top: 20px; font-size: 2em; line-height: 1.2; text-align: center; min-height: 120px;"></pre>
+                <pre id="animacion-ascii" style="margin-top: 20px; font-size: 2.5em; line-height: 1.2; text-align: center; min-height: 160px;"></pre>
             </div>
         </div>
     </div>
@@ -305,27 +300,26 @@
             }, 7000);
         }
 
-        setInterval(createParticle, 150); // Generar muchos emojis rápidamente
+        setInterval(createParticle, 150);
 
-        // 2. ANIMACIÓN DEL BAILARÍN ASCII EN LA TERMINAL (Nuestra propia solución)
-        const marcosBailarin = [
-            "  (•_•)  \n  <)   ) \n   /  \\  ",
-            "  (•_•)  \n  \\(  (> \n   /  \\  ",
-            " \\(•_•)/ \n   (   ) \n   /  \\  ",
-            "  (•_•)  \n  \\(  (> \n   /  \\  "
+        // 2. ANIMACIÓN DEL LORITO ASCII EN LA TERMINAL
+        const marcosLoro = [
+            "   \\\\\n   (o>\n   //\\\n   V_/_",
+            "   \\\\\n   (^>\n   //\\\n   V_/_",
+            "   //\n   <o)\n   /\\\\\n   _\\_V",
+            "   //\n   <^)\n   /\\\\\n   _\\_V"
         ];
         
         let marcoActual = 0;
         const contenedorAscii = document.getElementById('animacion-ascii');
-        // Colores neón para darle efecto RGB de fiesta a la terminal
         const coloresTerminal = ['#00ff00', '#00ffff', '#ff00ff', '#ffff00', '#ff5555'];
 
         setInterval(() => {
-            contenedorAscii.innerText = marcosBailarin[marcoActual];
+            contenedorAscii.innerText = marcosLoro[marcoActual];
             contenedorAscii.style.color = coloresTerminal[marcoActual % coloresTerminal.length];
             contenedorAscii.style.textShadow = `0 0 10px ${coloresTerminal[marcoActual % coloresTerminal.length]}`;
-            marcoActual = (marcoActual + 1) % marcosBailarin.length;
-        }, 400); // Cambia la pose de baile cada 400 milisegundos
+            marcoActual = (marcoActual + 1) % marcosLoro.length;
+        }, 300); // Velocidad de baile del lorito
     </script>
 </body>
 </html>
