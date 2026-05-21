@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños Profe!</title>
+    <style>
+        /* Importamos una fuente moderna y bonita */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            /* Fondo con tonos azules y animación */
+            background: linear-gradient(-45deg, #0b132b, #1c2541, #3a506b, #00b4d8);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animación del fondo CSS */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Estilo de la carta (Glassmorphism) */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 10;
+            margin: 40px 20px;
+        }
+
+        h1 {
+            color: #90e0ef;
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #caf0f8;
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        p {
+            font-size: 1.15em;
+            line-height: 1.7;
+            text-align: justify;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        .firma {
+            text-align: center;
+            font-weight: 700;
+            margin-top: 35px;
+            color: #00b4d8;
+            font-size: 1.3em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Sección de la playlist */
+        .playlist {
+            margin-top: 40px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px dashed #90e0ef;
+        }
+
+        .playlist h3 {
+            color: #90e0ef;
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .playlist ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .playlist li {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+        }
+
+        .playlist li:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        /* Contenedor de partículas */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Estilo base de los emojis */
+        .emoji-particle {
+            position: absolute;
+            animation: floatUp linear infinite;
+            opacity: 0.8;
+        }
+
+        /* Animación para que los emojis floten hacia arriba */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor para la lluvia de emojis -->
+    <div id="particles"></div>
+
+    <!-- Contenedor de la carta -->
+    <div class="card">
+        <h1>FELIZ CUMPLEAÑOS! 🎂</h1>
+        <h2>Para nuestro querido profesor de Sistemas:</h2>
+        
+        <p>Hoy, en este día especial, todos los estudiantes de grado 10° queremos enviarte nuestros más sinceros deseos de felicidad, salud y éxitos.</p>
+        
+        <p>Aunque hemos estado poquitos meses contigo, hemos aprendido bastante, gracias a tu paciencia y forma de explicar. Hemos descubierto que la tecnología no es solo códigos y programas, sino una herramienta que nos ayuda a crear, resolver problemas y construir el futuro. Gracias por compartir tus conocimientos y por hacernos ver que la especialidad de sistemas es apasionante y llena de posibilidades. Tu dedicación y entusiasmo nos motivan a aprender cada día más y a esforzarnos por alcanzar nuestras metas.</p>
+        
+        <p>Eres un maestro que no solo enseña materias, sino que también inspira a crecer y a creer en nuestras capacidades. Valoramos mucho tu trabajo y todo lo que haces por nosotros.</p>
+        
+        <p>Que este nuevo año de vida esté lleno de alegría, buenos momentos, logros y muchas satisfacciones. ¡Disfruta mucho tu día!</p>
+        
+        <p class="firma">Con cariño y admiración,<br>Todos los estudiantes de grado 10°</p>
+
+        <!-- Zona de música -->
+        <div class="playlist">
+            <h3>🎧 Playlist de Cumpleaños 🎧</h3>
+            <ul>
+                <li>🎶 Tu Cumpleaños - Diomedes Díaz</li>
+                <li>🎊 Las Mañanitas - Vicente Fernández</li>
+                <li>🕺 Happy - Pharrell Williams</li>
+                <li>💻 Harder, Better, Faster, Stronger - Daft Punk</li>
+                <li>🚀 The Final Countdown - Europe</li>
+                <li>🥳 Vivir Mi Vida - Marc Anthony</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Script para generar las partículas de emojis -->
+    <script>
+        // Los emojis que pediste
+        const emojis = ['🎊', '😊', '🤖', '👍', '🥳'];
+        const particlesContainer = document.getElementById('particles');
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('emoji-particle');
+            
+            // Selecciona un emoji al azar
+            particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            // Posición horizontal al azar
+            particle.style.left = Math.random() * 100 + 'vw';
+            
+            // Tamaño al azar (entre 20px y 45px)
+            particle.style.fontSize = Math.random() * 25 + 20 + 'px';
+            
+            // Duración de la animación al azar (para que unos vayan más rápido que otros)
+            particle.style.animationDuration = Math.random() * 4 + 4 + 's'; 
+            
+            particlesContainer.appendChild(particle);
+            
+            // Eliminar el elemento del HTML cuando termine su animación para no saturar la memoria
+            setTimeout(() => {
+                particle.remove();
+            }, 8000);
+        }
+
+        // Crear un nuevo emoji cada 400 milisegundos
+        setInterval(createParticle, 400);
+    </script>
+</body>
+</html>
