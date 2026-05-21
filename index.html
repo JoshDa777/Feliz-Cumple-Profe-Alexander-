@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Feliz Cumpleaños Profe!</title>
     <style>
-        /* Importamos una fuente moderna y bonita */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;700&display=swap');
 
         body {
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
-            /* Fondo con tonos azules y animación */
             background: linear-gradient(-45deg, #0b132b, #1c2541, #3a506b, #00b4d8);
             background-size: 400% 400%;
             animation: gradientBG 12s ease infinite;
@@ -22,16 +20,16 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Animación del fondo CSS */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Estilo de la carta (Glassmorphism) */
+        /* Estilo de la carta principal */
         .card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
@@ -41,7 +39,7 @@
             padding: 40px;
             max-width: 800px;
             text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
             position: relative;
             z-index: 10;
             margin: 40px 20px;
@@ -79,10 +77,10 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* Sección de la playlist */
+        /* Sección de los videos de YouTube */
         .playlist {
             margin-top: 40px;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.3);
             padding: 25px;
             border-radius: 15px;
             border: 1px dashed #90e0ef;
@@ -92,32 +90,113 @@
             color: #90e0ef;
             margin-top: 0;
             font-size: 1.5em;
+            margin-bottom: 20px;
         }
 
-        .playlist ul {
-            list-style: none;
-            padding: 0;
+        .videos-grid {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .playlist li {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 30px;
+        iframe.yt-video {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        /* Terminal Simulada */
+        .terminal {
+            background: #1e1e1e;
+            border-radius: 10px;
+            margin-top: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            text-align: left;
+            border: 1px solid #333;
+        }
+
+        .terminal-header {
+            background: #2d2d2d;
+            padding: 10px 15px;
+            color: #888;
+            font-family: 'Poppins', sans-serif;
             font-size: 0.9em;
-            transition: transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .terminal-header .btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .btn.red { background: #ff5f56; }
+        .btn.yellow { background: #ffbd2e; }
+        .btn.green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 15px;
+            font-family: 'Fira Code', monospace;
+            color: #00ff00;
+        }
+
+        .command {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .prompt-user { color: #00b4d8; }
+        .prompt-path { color: #fff; }
+
+        .terminal-body iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            background: #000;
+            border-radius: 5px;
+        }
+
+        /* Memes a los costados */
+        .side-memes {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            z-index: 5;
+        }
+
+        .side-memes.left { left: 30px; }
+        .side-memes.right { right: 30px; }
+
+        .side-memes img {
+            width: 220px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
             cursor: pointer;
         }
 
-        .playlist li:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+        .side-memes.left img { transform: rotate(-8deg); }
+        .side-memes.right img { transform: rotate(8deg); }
+
+        .side-memes img:hover {
+            transform: scale(1.15) rotate(0deg) !important;
+            z-index: 15;
+            box-shadow: 0 12px 30px rgba(0,255,255,0.4);
         }
 
-        /* Contenedor de partículas */
+        /* Ocultar memes en pantallas pequeñas para que no tapen la carta */
+        @media (max-width: 1350px) {
+            .side-memes { display: none; }
+        }
+
+        /* Contenedor de partículas (emojis) */
         #particles {
             position: fixed;
             top: 0;
@@ -129,14 +208,13 @@
             overflow: hidden;
         }
 
-        /* Estilo base de los emojis */
         .emoji-particle {
             position: absolute;
             animation: floatUp linear infinite;
-            opacity: 0.8;
+            opacity: 0.85;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
         }
 
-        /* Animación para que los emojis floten hacia arriba */
         @keyframes floatUp {
             0% {
                 transform: translateY(100vh) rotate(0deg) scale(0.8);
@@ -151,10 +229,22 @@
 </head>
 <body>
 
-    <!-- Contenedor para la lluvia de emojis -->
+    <!-- Lluvia de Emojis -->
     <div id="particles"></div>
 
-    <!-- Contenedor de la carta -->
+    <!-- Memes de la Izquierda -->
+    <div class="side-memes left">
+        <img src="https://i.imgflip.com/1q0b9p.jpg" alt="Meme Programador 1">
+        <img src="https://i.imgflip.com/1y99v3.jpg" alt="Meme Cumpleaños 1">
+    </div>
+
+    <!-- Memes de la Derecha -->
+    <div class="side-memes right">
+        <img src="https://i.imgflip.com/39t1cj.jpg" alt="Meme Programador 2">
+        <img src="https://i.imgflip.com/2v85b1.jpg" alt="Meme Cumpleaños 2">
+    </div>
+
+    <!-- Contenedor Principal de la Carta -->
     <div class="card">
         <h1>FELIZ CUMPLEAÑOS! 🎂</h1>
         <h2>Para nuestro querido profesor de Sistemas:</h2>
@@ -169,23 +259,37 @@
         
         <p class="firma">Con cariño y admiración,<br>Todos los estudiantes de grado 10°</p>
 
-        <!-- Zona de música -->
+        <!-- Zona de las Canciones -->
         <div class="playlist">
-            <h3>🎧 Playlist de Cumpleaños 🎧</h3>
-            <ul>
-                <li>🎶 Tu Cumpleaños - Diomedes Díaz</li>
-                <li>🎊 Las Mañanitas - Vicente Fernández</li>
-                <li>🕺 Happy - Pharrell Williams</li>
-                <li>💻 Harder, Better, Faster, Stronger - Daft Punk</li>
-                <li>🚀 The Final Countdown - Europe</li>
-                <li>🥳 Vivir Mi Vida - Marc Anthony</li>
-            </ul>
+            <h3>🎵 Soundtrack de tu Cumpleaños 🎵</h3>
+            <div class="videos-grid">
+                <!-- Video 1 -->
+                <iframe class="yt-video" src="https://www.youtube.com/embed/40AJMQob25o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <!-- Video 2 -->
+                <iframe class="yt-video" src="https://www.youtube.com/embed/YJ84U_30GRM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <!-- Video 3 -->
+                <iframe class="yt-video" src="https://www.youtube.com/embed/FE_KnGLsX5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Terminal del Party Parrot -->
+        <div class="terminal">
+            <div class="terminal-header">
+                <span class="btn red"></span>
+                <span class="btn yellow"></span>
+                <span class="btn green"></span>
+                bash - estudiante_grado10@sistemas:~
+            </div>
+            <div class="terminal-body">
+                <p class="command"><span class="prompt-user">estudiante_grado10@sistemas</span>:<span class="prompt-path">~</span>$ curl ascii.live/parrot</p>
+                <!-- Usamos un iframe directamente apuntando a la web que reproduce la animación ASCII en navegador -->
+                <iframe src="https://ascii.live/parrot" title="Party Parrot Terminal"></iframe>
+            </div>
         </div>
     </div>
 
-    <!-- Script para generar las partículas de emojis -->
+    <!-- Script de Emojis -->
     <script>
-        // Los emojis que pediste
         const emojis = ['🎊', '😊', '🤖', '👍', '🥳'];
         const particlesContainer = document.getElementById('particles');
 
@@ -193,28 +297,23 @@
             const particle = document.createElement('div');
             particle.classList.add('emoji-particle');
             
-            // Selecciona un emoji al azar
             particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            
-            // Posición horizontal al azar
             particle.style.left = Math.random() * 100 + 'vw';
             
-            // Tamaño al azar (entre 20px y 45px)
-            particle.style.fontSize = Math.random() * 25 + 20 + 'px';
+            // ¡Emojis más grandes! (entre 40px y 90px)
+            particle.style.fontSize = Math.random() * 50 + 40 + 'px';
             
-            // Duración de la animación al azar (para que unos vayan más rápido que otros)
-            particle.style.animationDuration = Math.random() * 4 + 4 + 's'; 
+            particle.style.animationDuration = Math.random() * 3 + 4 + 's'; 
             
             particlesContainer.appendChild(particle);
             
-            // Eliminar el elemento del HTML cuando termine su animación para no saturar la memoria
             setTimeout(() => {
                 particle.remove();
-            }, 8000);
+            }, 7000);
         }
 
-        // Crear un nuevo emoji cada 400 milisegundos
-        setInterval(createParticle, 400);
+        // ¡Mayor cantidad de emojis! Se genera uno cada 150 milisegundos
+        setInterval(createParticle, 150);
     </script>
 </body>
 </html>
