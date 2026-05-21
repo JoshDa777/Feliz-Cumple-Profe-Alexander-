@@ -110,7 +110,7 @@
            ESTILOS REALISTAS DE POWERSHELL
            ========================================= */
         .ps-window {
-            background: #012456; /* Azul clásico de PowerShell */
+            background: #012456; 
             border: 1px solid #001a40;
             margin-top: 40px;
             text-align: left;
@@ -178,14 +178,14 @@
             margin-right: 5px;
         }
         
-        /* Contenedor del loro ASCII */
+        /* Contenedor del loro ASCII original */
         .ps-ascii {
             margin-top: 20px;
-            text-align: center;
-            font-size: 2.2em;
-            line-height: 1.15;
+            text-align: left;
+            font-size: 1.1em; /* Ajustado para que el frame grande quepa bien */
+            line-height: 1.1;
             white-space: pre;
-            font-weight: bold;
+            font-weight: normal;
         }
 
         /* Memes a los costados */
@@ -313,7 +313,7 @@
                     <span class="ps-path">PS C:\Users\Sistema\Grado10></span> curl ascii.live/parrot
                 </div>
                 
-                <div id="parrot-ascii" class="ps-ascii"></div>
+                <div id="parrot-ascii" class="ps-ascii">Conectando a github.com/hugomd/parrot.live...</div>
             </div>
         </div>
     </div>
@@ -337,29 +337,45 @@
         }
         setInterval(createParticle, 150);
 
-        // 2. ANIMACIÓN DEL LORITO ASCII EN LA TERMINAL POWERSHELL
-        const marcosLoro = [
-            "   \\\\\n   (o>\n   //\\\n   V_/_",
-            "   \\\\\n   (^>\n   //\\\n   V_/_",
-            "   //\n   <o)\n   /\\\\\n   _\\_V",
-            "   //\n   <^)\n   /\\\\\n   _\\_V"
-        ];
-        
-        let marcoActual = 0;
+        // 2. FETCH DE LOS FRAMES ORIGINALES DESDE EL REPOSITORIO DE GITHUB
+        const marcosLoro = [];
         const contenedorAscii = document.getElementById('parrot-ascii');
         const coloresTerminal = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#F063A4', '#FF9F45'];
+        let marcoActual = 0;
 
-        setInterval(() => {
-            // Animamos los marcos del loro
-            contenedorAscii.innerText = marcosLoro[marcoActual % marcosLoro.length];
-            
-            // Le damos colores rotativos de fiesta
-            const colorActual = coloresTerminal[marcoActual % coloresTerminal.length];
-            contenedorAscii.style.color = colorActual;
-            contenedorAscii.style.textShadow = `0 0 10px ${colorActual}`;
-            
-            marcoActual++;
-        }, 200); // Velocidad rápida para el lorito bailador
+        async function cargarLoroOriginal() {
+            // El repositorio original usa 10 frames (del 0 al 9)
+            for (let i = 0; i < 10; i++) {
+                try {
+                    // Descargamos el archivo de texto en bruto (raw) desde GitHub
+                    const respuesta = await fetch(`https://raw.githubusercontent.com/hugomd/parrot.live/master/frames/${i}.txt`);
+                    if (respuesta.ok) {
+                        const texto = await respuesta.text();
+                        marcosLoro.push(texto);
+                    }
+                } catch (error) {
+                    console.error("Error al cargar el frame " + i, error);
+                }
+            }
+
+            // Si se descargaron con éxito, iniciamos la animación
+            if (marcosLoro.length > 0) {
+                setInterval(() => {
+                    contenedorAscii.innerText = marcosLoro[marcoActual % marcosLoro.length];
+                    
+                    // Colores rotativos de fiesta
+                    const colorActual = coloresTerminal[marcoActual % coloresTerminal.length];
+                    contenedorAscii.style.color = colorActual;
+                    
+                    marcoActual++;
+                }, 70); // 70ms es la velocidad de refresco idéntica a la herramienta original
+            } else {
+                contenedorAscii.innerText = "Error: No se pudo conectar al repositorio original.";
+            }
+        }
+
+        // Iniciar la descarga y animación
+        cargarLoroOriginal();
     </script>
 </body>
 </html>
