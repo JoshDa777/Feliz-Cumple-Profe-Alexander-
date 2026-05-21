@@ -139,18 +139,41 @@
         .btn.green { background: #27c93f; }
 
         .terminal-body {
-            padding: 15px;
+            padding: 30px;
+            text-align: center;
             font-family: 'Fira Code', monospace;
-            color: #00ff00;
         }
 
-        .command {
-            margin: 0 0 10px 0;
+        .command-text {
+            color: #00ff00;
             font-size: 1.1em;
+            margin-bottom: 20px;
         }
 
         .prompt-user { color: #00b4d8; }
         .prompt-path { color: #fff; }
+
+        /* Botón estilo hacker para ejecutar el comando */
+        .btn-ejecutar {
+            background: #00ff00;
+            color: #000;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-ejecutar:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
 
         /* Memes a los costados */
         .side-memes {
@@ -172,7 +195,6 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.5);
             transition: all 0.3s ease;
             cursor: pointer;
-            /* Estilo por si la imagen no carga de inmediato */
             background: rgba(255,255,255,0.1);
             min-height: 150px;
             color: #ccc;
@@ -216,14 +238,8 @@
         }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) rotate(0deg) scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-20vh) rotate(360deg) scale(1.5);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(360deg) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
@@ -232,13 +248,13 @@
     <div id="particles"></div>
 
     <div class="side-memes left">
-        <img src="meme_profe_1.jpg" alt="Coloca tu meme aquí (meme_profe_1.jpg)">
-        <img src="meme_cumple_1.jpg" alt="Coloca tu meme aquí (meme_cumple_1.jpg)">
+        <img src="meme_profe_1.jpg" alt="Meme Programador 1">
+        <img src="meme_cumple_1.jpg" alt="Meme Cumple 1">
     </div>
 
     <div class="side-memes right">
-        <img src="meme_profe_2.jpg" alt="Coloca tu meme aquí (meme_profe_2.jpg)">
-        <img src="meme_cumple_2.jpg" alt="Coloca tu meme aquí (meme_cumple_2.jpg)">
+        <img src="meme_profe_2.jpg" alt="Meme Programador 2">
+        <img src="meme_cumple_2.jpg" alt="Meme Cumple 2">
     </div>
 
     <div class="card">
@@ -272,9 +288,12 @@
                 bash - estudiante_grado10@sistemas:~
             </div>
             <div class="terminal-body">
-                <p class="command"><span class="prompt-user">estudiante_grado10@sistemas</span>:<span class="prompt-path">~</span>$ curl ascii.live/parrot</p>
-                
-                <pre id="animacion-ascii" style="margin-top: 20px; font-size: 2.5em; line-height: 1.2; text-align: center; min-height: 160px;"></pre>
+                <div class="command-text">
+                    <span class="prompt-user">estudiante_grado10@sistemas</span>:<span class="prompt-path">~</span>$ Presiona el botón para ejecutar el script de sorpresa...
+                </div>
+                <button class="btn-ejecutar" onclick="abrirTerminalReal()">
+                    >_ Ejecutar: curl ascii.live/earth
+                </button>
             </div>
         </div>
     </div>
@@ -295,31 +314,21 @@
             
             particlesContainer.appendChild(particle);
             
-            setTimeout(() => {
-                particle.remove();
-            }, 7000);
+            setTimeout(() => { particle.remove(); }, 7000);
         }
 
         setInterval(createParticle, 150);
 
-        // 2. ANIMACIÓN DEL LORITO ASCII EN LA TERMINAL
-        const marcosLoro = [
-            "   \\\\\n   (o>\n   //\\\n   V_/_",
-            "   \\\\\n   (^>\n   //\\\n   V_/_",
-            "   //\n   <o)\n   /\\\\\n   _\\_V",
-            "   //\n   <^)\n   /\\\\\n   _\\_V"
-        ];
-        
-        let marcoActual = 0;
-        const contenedorAscii = document.getElementById('animacion-ascii');
-        const coloresTerminal = ['#00ff00', '#00ffff', '#ff00ff', '#ffff00', '#ff5555'];
-
-        setInterval(() => {
-            contenedorAscii.innerText = marcosLoro[marcoActual];
-            contenedorAscii.style.color = coloresTerminal[marcoActual % coloresTerminal.length];
-            contenedorAscii.style.textShadow = `0 0 10px ${coloresTerminal[marcoActual % coloresTerminal.length]}`;
-            marcoActual = (marcoActual + 1) % marcosLoro.length;
-        }, 300); // Velocidad de baile del lorito
+        // 2. FUNCIÓN PARA ABRIR LA TERMINAL REAL EN POP-UP
+        function abrirTerminalReal() {
+            // Esto abrirá una ventana nueva con las proporciones de una terminal clásica
+            // Apuntando directamente a la web nativa, evadiendo el bloqueo de iframes
+            window.open(
+                'https://ascii.live/earth', 
+                'SorpresaTerminal', 
+                'width=800,height=600,background=black,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,status=no'
+            );
+        }
     </script>
 </body>
 </html>
