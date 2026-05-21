@@ -152,12 +152,16 @@
         .prompt-user { color: #00b4d8; }
         .prompt-path { color: #fff; }
 
-        .terminal-body iframe {
-            width: 100%;
-            height: 350px;
-            border: none;
-            background: #000;
-            border-radius: 5px;
+        .sys-msg {
+            color: #aaa;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+
+        .sys-success {
+            color: #00b4d8;
+            font-size: 0.9em;
+            margin: 5px 0 20px 0;
         }
 
         /* Memes a los costados */
@@ -191,7 +195,6 @@
             box-shadow: 0 12px 30px rgba(0,255,255,0.4);
         }
 
-        /* Ocultar memes en pantallas pequeñas para que no tapen la carta */
         @media (max-width: 1350px) {
             .side-memes { display: none; }
         }
@@ -229,22 +232,18 @@
 </head>
 <body>
 
-    <!-- Lluvia de Emojis -->
     <div id="particles"></div>
 
-    <!-- Memes de la Izquierda -->
     <div class="side-memes left">
         <img src="https://i.imgflip.com/1q0b9p.jpg" alt="Meme Programador 1">
         <img src="https://i.imgflip.com/1y99v3.jpg" alt="Meme Cumpleaños 1">
     </div>
 
-    <!-- Memes de la Derecha -->
     <div class="side-memes right">
         <img src="https://i.imgflip.com/39t1cj.jpg" alt="Meme Programador 2">
         <img src="https://i.imgflip.com/2v85b1.jpg" alt="Meme Cumpleaños 2">
     </div>
 
-    <!-- Contenedor Principal de la Carta -->
     <div class="card">
         <h1>FELIZ CUMPLEAÑOS! 🎂</h1>
         <h2>Para nuestro querido profesor de Sistemas:</h2>
@@ -259,20 +258,15 @@
         
         <p class="firma">Con cariño y admiración,<br>Todos los estudiantes de grado 10°</p>
 
-        <!-- Zona de las Canciones -->
         <div class="playlist">
             <h3>🎵 Soundtrack de tu Cumpleaños 🎵</h3>
             <div class="videos-grid">
-                <!-- Video 1 -->
                 <iframe class="yt-video" src="https://www.youtube.com/embed/40AJMQob25o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <!-- Video 2 -->
                 <iframe class="yt-video" src="https://www.youtube.com/embed/YJ84U_30GRM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <!-- Video 3 -->
                 <iframe class="yt-video" src="https://www.youtube.com/embed/FE_KnGLsX5c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
 
-        <!-- Terminal del Party Parrot -->
         <div class="terminal">
             <div class="terminal-header">
                 <span class="btn red"></span>
@@ -281,15 +275,17 @@
                 bash - estudiante_grado10@sistemas:~
             </div>
             <div class="terminal-body">
-                <p class="command"><span class="prompt-user">estudiante_grado10@sistemas</span>:<span class="prompt-path">~</span>$ curl ascii.live/parrot</p>
-                <!-- Usamos un iframe directamente apuntando a la web que reproduce la animación ASCII en navegador -->
-                <iframe src="https://ascii.live/parrot" title="Party Parrot Terminal"></iframe>
+                <p class="command"><span class="prompt-user">estudiante_grado10@sistemas</span>:<span class="prompt-path">~</span>$ ./iniciar_fiesta.sh</p>
+                <p class="sys-msg">[INFO] Descargando módulos de celebración...</p>
+                <p class="sys-success">[OK] Dependencias instaladas. Iniciando pista de baile al 100%.</p>
+                
+                <pre id="animacion-ascii" style="margin-top: 20px; font-size: 2em; line-height: 1.2; text-align: center; min-height: 120px;"></pre>
             </div>
         </div>
     </div>
 
-    <!-- Script de Emojis -->
     <script>
+        // 1. GENERADOR DE EMOJIS DE FONDO
         const emojis = ['🎊', '😊', '🤖', '👍', '🥳'];
         const particlesContainer = document.getElementById('particles');
 
@@ -299,10 +295,7 @@
             
             particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
             particle.style.left = Math.random() * 100 + 'vw';
-            
-            // ¡Emojis más grandes! (entre 40px y 90px)
-            particle.style.fontSize = Math.random() * 50 + 40 + 'px';
-            
+            particle.style.fontSize = Math.random() * 50 + 40 + 'px'; // Tamaños entre 40px y 90px
             particle.style.animationDuration = Math.random() * 3 + 4 + 's'; 
             
             particlesContainer.appendChild(particle);
@@ -312,8 +305,27 @@
             }, 7000);
         }
 
-        // ¡Mayor cantidad de emojis! Se genera uno cada 150 milisegundos
-        setInterval(createParticle, 150);
+        setInterval(createParticle, 150); // Generar muchos emojis rápidamente
+
+        // 2. ANIMACIÓN DEL BAILARÍN ASCII EN LA TERMINAL (Nuestra propia solución)
+        const marcosBailarin = [
+            "  (•_•)  \n  <)   ) \n   /  \\  ",
+            "  (•_•)  \n  \\(  (> \n   /  \\  ",
+            " \\(•_•)/ \n   (   ) \n   /  \\  ",
+            "  (•_•)  \n  \\(  (> \n   /  \\  "
+        ];
+        
+        let marcoActual = 0;
+        const contenedorAscii = document.getElementById('animacion-ascii');
+        // Colores neón para darle efecto RGB de fiesta a la terminal
+        const coloresTerminal = ['#00ff00', '#00ffff', '#ff00ff', '#ffff00', '#ff5555'];
+
+        setInterval(() => {
+            contenedorAscii.innerText = marcosBailarin[marcoActual];
+            contenedorAscii.style.color = coloresTerminal[marcoActual % coloresTerminal.length];
+            contenedorAscii.style.textShadow = `0 0 10px ${coloresTerminal[marcoActual % coloresTerminal.length]}`;
+            marcoActual = (marcoActual + 1) % marcosBailarin.length;
+        }, 400); // Cambia la pose de baile cada 400 milisegundos
     </script>
 </body>
 </html>
