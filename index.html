@@ -29,7 +29,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Estilo de la carta principal */
         .card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
@@ -77,7 +76,6 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* Sección de los videos de YouTube */
         .playlist {
             margin-top: 40px;
             background: rgba(0, 0, 0, 0.3);
@@ -106,9 +104,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
-        /* =========================================
-           ESTILOS REALISTAS DE POWERSHELL
-           ========================================= */
+
         .ps-window {
             background: #012456; 
             border: 1px solid #001a40;
@@ -178,17 +174,17 @@
             margin-right: 5px;
         }
         
-        /* Contenedor del loro ASCII original */
+
         .ps-ascii {
             margin-top: 20px;
             text-align: left;
-            font-size: 1.1em; /* Ajustado para que el frame grande quepa bien */
+            font-size: 1.1em; 
             line-height: 1.1;
             white-space: pre;
             font-weight: normal;
         }
 
-        /* Memes a los costados */
+        
         .side-memes {
             position: fixed;
             top: 50%;
@@ -231,7 +227,7 @@
             .side-memes { display: none; }
         }
 
-        /* Contenedor de partículas (emojis) */
+       
         #particles {
             position: fixed;
             top: 0;
@@ -319,7 +315,7 @@
     </div>
 
     <script>
-        // 1. GENERADOR DE EMOJIS DE FONDO
+       
         const emojis = ['🎊', '😊', '🤖', '👍', '🥳'];
         const particlesContainer = document.getElementById('particles');
 
@@ -337,17 +333,17 @@
         }
         setInterval(createParticle, 150);
 
-        // 2. FETCH DE LOS FRAMES ORIGINALES DESDE EL REPOSITORIO DE GITHUB
+        
         const marcosLoro = [];
         const contenedorAscii = document.getElementById('parrot-ascii');
         const coloresTerminal = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#F063A4', '#FF9F45'];
         let marcoActual = 0;
 
         async function cargarLoroOriginal() {
-            // El repositorio original usa 10 frames (del 0 al 9)
+           
             for (let i = 0; i < 10; i++) {
                 try {
-                    // Descargamos el archivo de texto en bruto (raw) desde GitHub
+                
                     const respuesta = await fetch(`https://raw.githubusercontent.com/hugomd/parrot.live/master/frames/${i}.txt`);
                     if (respuesta.ok) {
                         const texto = await respuesta.text();
@@ -358,23 +354,23 @@
                 }
             }
 
-            // Si se descargaron con éxito, iniciamos la animación
+          
             if (marcosLoro.length > 0) {
                 setInterval(() => {
                     contenedorAscii.innerText = marcosLoro[marcoActual % marcosLoro.length];
                     
-                    // Colores rotativos de fiesta
+                    
                     const colorActual = coloresTerminal[marcoActual % coloresTerminal.length];
                     contenedorAscii.style.color = colorActual;
                     
                     marcoActual++;
-                }, 70); // 70ms es la velocidad de refresco idéntica a la herramienta original
+                }, 70); 
             } else {
                 contenedorAscii.innerText = "Error: No se pudo conectar al repositorio original.";
             }
         }
 
-        // Iniciar la descarga y animación
+        
         cargarLoroOriginal();
     </script>
 </body>
