@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Feliz Cumpleaños Profe!</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
         body {
             margin: 0;
@@ -106,73 +106,86 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
 
-        /* Terminal Simulada */
-        .terminal {
-            background: #1e1e1e;
-            border-radius: 10px;
+        /* =========================================
+           ESTILOS REALISTAS DE POWERSHELL
+           ========================================= */
+        .ps-window {
+            background: #012456; /* Azul clásico de PowerShell */
+            border: 1px solid #001a40;
             margin-top: 40px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
             text-align: left;
-            border: 1px solid #333;
+            box-shadow: 5px 5px 25px rgba(0,0,0,0.8);
+            border-radius: 2px;
+            overflow: hidden;
+            font-family: 'Consolas', 'Lucida Console', monospace;
+            color: #eeeeee;
         }
 
-        .terminal-header {
-            background: #2d2d2d;
-            padding: 10px 15px;
-            color: #888;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9em;
+        .ps-header {
+            background: #eeeeee;
+            color: #000;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 0.85em;
+            user-select: none;
+        }
+
+        .ps-title {
             display: flex;
             align-items: center;
+            gap: 8px;
         }
 
-        .terminal-header .btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .btn.red { background: #ff5f56; }
-        .btn.yellow { background: #ffbd2e; }
-        .btn.green { background: #27c93f; }
-
-        .terminal-body {
-            padding: 30px;
-            text-align: center;
-            font-family: 'Fira Code', monospace;
-        }
-
-        .command-text {
-            color: #00ff00;
-            font-size: 1.1em;
-            margin-bottom: 20px;
-        }
-
-        .prompt-user { color: #00b4d8; }
-        .prompt-path { color: #fff; }
-
-        /* Botón estilo hacker para ejecutar el comando */
-        .btn-ejecutar {
-            background: #00ff00;
-            color: #000;
-            font-family: 'Fira Code', monospace;
-            font-size: 1.2em;
+        .ps-icon {
+            color: #012456;
             font-weight: bold;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
-            transition: all 0.3s ease;
         }
 
-        .btn-ejecutar:hover {
-            background: #fff;
-            color: #000;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
-            transform: scale(1.05);
+        .ps-controls {
+            display: flex;
+            gap: 2px;
+        }
+
+        .ps-btn {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .ps-btn:hover { background: #ccc; }
+        .ps-btn.close:hover { background: #e81123; color: white; }
+
+        .ps-body {
+            padding: 15px;
+            min-height: 280px;
+        }
+
+        .ps-line {
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .ps-path { 
+            color: #eeeeee; 
+            margin-right: 5px;
+        }
+        
+        /* Contenedor del loro ASCII */
+        .ps-ascii {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 2.2em;
+            line-height: 1.15;
+            white-space: pre;
+            font-weight: bold;
         }
 
         /* Memes a los costados */
@@ -248,12 +261,12 @@
     <div id="particles"></div>
 
     <div class="side-memes left">
-        <img src="meme_profe_1.jpg" alt="Meme Programador 1">
+        <img src="meme_profe_1.jpg" alt="Meme Profe 1">
         <img src="meme_cumple_1.jpg" alt="Meme Cumple 1">
     </div>
 
     <div class="side-memes right">
-        <img src="meme_profe_2.jpg" alt="Meme Programador 2">
+        <img src="meme_profe_2.jpg" alt="Meme Profe 2">
         <img src="meme_cumple_2.jpg" alt="Meme Cumple 2">
     </div>
 
@@ -280,20 +293,27 @@
             </div>
         </div>
 
-        <div class="terminal">
-            <div class="terminal-header">
-                <span class="btn red"></span>
-                <span class="btn yellow"></span>
-                <span class="btn green"></span>
-                bash - estudiante_grado10@sistemas:~
-            </div>
-            <div class="terminal-body">
-                <div class="command-text">
-                    <span class="prompt-user">estudiante_grado10@sistemas</span>:<span class="prompt-path">~</span>$ Presiona el botón para ejecutar el script de sorpresa...
+        <div class="ps-window">
+            <div class="ps-header">
+                <div class="ps-title">
+                    <span class="ps-icon">>_</span>
+                    <span>Windows PowerShell</span>
                 </div>
-                <button class="btn-ejecutar" onclick="abrirTerminalReal()">
-                    >_ Ejecutar: curl ascii.live/earth
-                </button>
+                <div class="ps-controls">
+                    <div class="ps-btn">─</div>
+                    <div class="ps-btn">☐</div>
+                    <div class="ps-btn close">✕</div>
+                </div>
+            </div>
+            <div class="ps-body">
+                <div class="ps-line">Windows PowerShell</div>
+                <div class="ps-line">Copyright (C) Microsoft Corporation. Todos los derechos reservados.</div>
+                <br>
+                <div class="ps-line">
+                    <span class="ps-path">PS C:\Users\Sistema\Grado10></span> curl ascii.live/parrot
+                </div>
+                
+                <div id="parrot-ascii" class="ps-ascii"></div>
             </div>
         </div>
     </div>
@@ -309,26 +329,37 @@
             
             particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
             particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.fontSize = Math.random() * 50 + 40 + 'px'; // Tamaños entre 40px y 90px
+            particle.style.fontSize = Math.random() * 50 + 40 + 'px'; 
             particle.style.animationDuration = Math.random() * 3 + 4 + 's'; 
             
             particlesContainer.appendChild(particle);
-            
             setTimeout(() => { particle.remove(); }, 7000);
         }
-
         setInterval(createParticle, 150);
 
-        // 2. FUNCIÓN PARA ABRIR LA TERMINAL REAL EN POP-UP
-        function abrirTerminalReal() {
-            // Esto abrirá una ventana nueva con las proporciones de una terminal clásica
-            // Apuntando directamente a la web nativa, evadiendo el bloqueo de iframes
-            window.open(
-                'https://ascii.live/earth', 
-                'SorpresaTerminal', 
-                'width=800,height=600,background=black,resizable=no,scrollbars=no,toolbar=no,menubar=no,location=no,status=no'
-            );
-        }
+        // 2. ANIMACIÓN DEL LORITO ASCII EN LA TERMINAL POWERSHELL
+        const marcosLoro = [
+            "   \\\\\n   (o>\n   //\\\n   V_/_",
+            "   \\\\\n   (^>\n   //\\\n   V_/_",
+            "   //\n   <o)\n   /\\\\\n   _\\_V",
+            "   //\n   <^)\n   /\\\\\n   _\\_V"
+        ];
+        
+        let marcoActual = 0;
+        const contenedorAscii = document.getElementById('parrot-ascii');
+        const coloresTerminal = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#F063A4', '#FF9F45'];
+
+        setInterval(() => {
+            // Animamos los marcos del loro
+            contenedorAscii.innerText = marcosLoro[marcoActual % marcosLoro.length];
+            
+            // Le damos colores rotativos de fiesta
+            const colorActual = coloresTerminal[marcoActual % coloresTerminal.length];
+            contenedorAscii.style.color = colorActual;
+            contenedorAscii.style.textShadow = `0 0 10px ${colorActual}`;
+            
+            marcoActual++;
+        }, 200); // Velocidad rápida para el lorito bailador
     </script>
 </body>
 </html>
